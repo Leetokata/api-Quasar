@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Producto;
 
-use App\Http\Requests\Producto\StoreProductoRequest as StoreRequest;
-use App\Http\Requests\Producto\UpdateProductoRequest as UpdateRequest;
+use App\Http\Requests\ProductoRequest;
 
 use App\Http\Resources\ProductoResource;
 
@@ -19,8 +18,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::orderBy('id','desc')->paginate(10);
-       // $productos = Producto::with('variaciones')->get();
+        $productos = Producto::orderBy('id','desc')->get();
+        //$productos = Producto::with('variaciones')->get();
 
         return ProductoResource::collection($productos);
     }
@@ -28,7 +27,7 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(ProductoRequest $request)
     {
 
        // Producto::create($request->all());
@@ -51,7 +50,7 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Producto $producto)
+    public function update(ProductoRequest $request, Producto $producto)
     {
         $producto->update($request->all());
         return new ProductoResource($producto);

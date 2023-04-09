@@ -10,7 +10,7 @@ use App\Models\Variacion;
 
 use App\Http\Resources\VariacionResource;
 
-// use App\Http\Requests\Variacion\IndexVariacionRequest;
+ use App\Http\Requests\VariacionRequest;
 
 class VariacionController extends Controller
 {
@@ -26,25 +26,27 @@ class VariacionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VariacionRequest $request)
     {
-        //
+        return new VariacionResource(Variacion::create($request->all()));
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Variacion $variacion)
     {
-        //
+        return new VariacionResource($variacion);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(VariacionRequest $request, Variacion $variacion)
     {
-        //
+        $variacion->update($request->all());
+        return new VariacionResource($variacion);
     }
 
     /**

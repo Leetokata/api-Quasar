@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Producto;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProductoRequest extends FormRequest
+class VariacionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class UpdateProductoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required',
+            'producto_id' => 'required',
             'referencia' => 'required',
             'descripcion' => 'required',
-            'precio' => 'required',
+            'precio' => 'required|gt:0',
         ];
     }
 }

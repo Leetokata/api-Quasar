@@ -11,6 +11,12 @@ class Variacion extends Model
 
     protected $table = 'variaciones';
 
+    protected $fillable = [
+        'referencia',
+        'descripcion',
+        'precio',
+        'producto_id'
+    ];
     public function producto()
     {
         return $this->belongsTo(Producto::class);

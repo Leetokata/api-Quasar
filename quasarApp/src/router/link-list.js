@@ -6,12 +6,6 @@ export const linksList = [
     link: 'productos'
   },
   {
-    title: 'Other',
-    caption: 'Otra vista',
-    icon: 'list',
-    link: 'test'
-  },
-  {
     title: 'Ing. Luis Davalillo',
     caption: 'Perfil de Linkedin',
     icon: 'contact_mail',

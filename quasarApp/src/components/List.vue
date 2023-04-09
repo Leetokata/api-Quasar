@@ -28,8 +28,8 @@
         >
         <template v-slot:body-cell-accion="props">
           <q-td :props="props">
-            <q-btn dense round flat color="indigo-12"  icon="edit" @click="pushProduct(props)"></q-btn>
-
+            <q-btn dense round flat color="indigo-12"  icon="preview" @click="showProduct(props)"></q-btn>
+            <q-btn dense round flat color="indigo-12"  icon="edit" @click="editProduct(props)"></q-btn>
           </q-td>
         </template>
         </q-table>
@@ -44,11 +44,12 @@
 
 import { computed, ref, defineComponent } from 'vue'
 import { api } from 'src/boot/axios'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'List',
   setup(){
-
+    const router = useRouter()
     const isLoading = false
 
     const columns = [
@@ -90,25 +91,26 @@ export default defineComponent({
     ]
 
     const rows = ref()
-    const pushProduct = (row)=>{
-      console.log(row.key)
+    const editProduct = (row)=>{
+      router.push({name:'EditProduct', params: {id: row.key }})
     }
-    const getProduct = async ()=>{
+    const getProducts = async ()=>{
       const { data } = await api.get('/producto')
-     rows.value = data.data,
-      console.log(data.data)
-
+      rows.value = data.data
     }
 
+    const showProduct = (row) =>{
+      router.push({name:'showProducto', params: {id: row.key }})
+    }
 
-    getProduct()
+    getProducts()
 
     return {
-      pushProduct,
+      editProduct,
       isLoading,
       rows,
       columns,
-
+      showProduct
 
     }
   }

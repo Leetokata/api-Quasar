@@ -2,11 +2,16 @@
 const routes = [
   {
     path: '/',
+    redirect: 'productos',
     component: () => import('layouts/MainLayout.vue'),
     children: [
 
       { path: 'productos', name: 'productos', component: () => import('components/List.vue') },
       { path: 'test', name: 'test', component: () => import('pages/TestPage.vue') },
+
+
+
+      { path: 'producto/:id/variantes', name: 'showProducto', component: () => import('components/ListProductVariants.vue') },
       {
         path: 'producto',
         name: 'addProduct',
